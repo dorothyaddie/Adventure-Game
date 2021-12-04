@@ -2,10 +2,13 @@
 //methods that only work for some places
 //maybe some methods can only be called when in certain rooms, meaning they are paramters
 
-public class Place implements Set {
+public class Place {
+  private String name; 
+
   /*Constructor that makes a new place*/
-  public Place(String s) {
-    String name = s; //name of place
+  public Place(String name) {
+    this.name = name;
+   //name of place
   }
 
   /** things a place has: 
@@ -16,9 +19,13 @@ public class Place implements Set {
   * 
   */
 
-  //public String getName() {
-    //return this.name;
-  //}
+  public String getName() {
+     return name;
+  }
+
+  public String toString() {
+    return name;
+  }
 
   
 }
