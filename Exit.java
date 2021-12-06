@@ -10,36 +10,20 @@ public class Exit {
     MutableGraph<Place> map = GraphBuilder.undirected().build();
 
     /*Creating all the rooms*/
-    Place bedroom = new Place("bedroom");
-    Place hallway = new Place("hallway");
-    Place entrance = new Place("entrance");
-    Place foyer = new Place("foyer");
-    Place balcony = new Place("balcony");
-    Place bathroom = new Place("bathroom");
-    Place kitchen = new Place("kitchen");
-    Place living = new Place("living");
+    Place shed = new Place("shed");
+    Place garden = new Place("garden");
     Place dining = new Place("dining");
-    Place pool = new Place("pool");
-    Place beach = new Place("beach");
-    Place closet = new Place("closet");
+    Place kitchen = new Place("kitchen");
+
 
     /*Connecting the rooms with edges and creating nodes*/
-    map.putEdge(entrance, foyer);
-    map.putEdge(foyer, closet);
-    map.putEdge(foyer, bathroom);
-    map.putEdge(foyer, kitchen);
-    map.putEdge(foyer, living);
-    map.putEdge(foyer, hallway);
-    map.putEdge(hallway, bedroom);
-    map.putEdge(bedroom, balcony);
-    map.putEdge(living, dining);
-    map.putEdge(kitchen, dining);
-    map.putEdge(kitchen, bathroom);
-    map.putEdge(living, pool);
-    map.putEdge(pool, beach);
+    map.putEdge(shed, garden);
+    map.putEdge(garden, dining);
+    map.putEdge(dining, kitchen);
+    map.putEdge(garden, kitchen);
 
     System.out.println(map);
 
-    System.out.println(map.adjacentNodes(foyer));
+    System.out.println(map.adjacentNodes(shed));
   }
 }

@@ -1,6 +1,6 @@
 //this is the place class
 //methods that only work for some places
-//maybe some methods can only be called when in certain rooms, meaning they are paramters
+//maybe some methods can only be called when in certain rooms, meaning they are parameters
 
 public class Place {
   private String name; 
