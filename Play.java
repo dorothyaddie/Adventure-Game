@@ -19,6 +19,7 @@ public class Play {
   Exit map = new Exit();
   //creates a variable for current node
   Place current = garden; //maybe use Iterable? create Traverser and do breadth first traversal (i think), point to garden in map using index in Iterable? maybe use a map to store each Place and its index, access each Place by index determined by Iterable... HashMap?
+  // ok OR use a getter in Exit to get Node w name "garden"
   private boolean playing = true;
   Scanner sc = new Scanner(System.in);
   private String choice;
