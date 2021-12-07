@@ -16,22 +16,34 @@ public class Play {
   /*Constructor creates a new instance of the map*/
 
   //creates a new map
-  Exit map = new Exit();
+  //private static Exit world = new Exit();
   //creates a variable for current node
-  Place current = garden; //maybe use Iterable? create Traverser and do breadth first traversal (i think), point to garden in map using index in Iterable? maybe use a map to store each Place and its index, access each Place by index determined by Iterable... HashMap?
+  private static Place current = Exit.garden; //maybe use Iterable? create Traverser and do breadth first traversal (i think), point to garden in map using index in Iterable? maybe use a map to store each Place and its index, access each Place by index determined by Iterable... HashMap?
   // ok OR use a getter in Exit to get Node w name "garden"
-  private boolean playing = true;
-  Scanner sc = new Scanner(System.in);
-  private String choice;
+  private static boolean playing;
+  static Scanner sc = new Scanner(System.in);
+  private static String choice;
+  private Exit world = new Exit();
   
-  public void playGame(Exit map) {
+  public static void playGame(Exit world) {
+    //creates a new map
+    playing = true;
     while (playing == true) {
-      System.out.println("You are currently at" + current + "You see" + current.getDescription() + "Your possible movements are" + map.adjacentNodes(current) + "Where would you like to go?");
+      Set<Place> currNeighbors = Exit.getNeighbors(current);
+      System.out.println("You are currently at" + current.getName() + "You see" + current.getDescription() + "Your possible movements are" + currNeighbors + "Where would you like to go?");
       choice = sc.nextLine();
-      if (map.adjacentNodes(current).contains(choice)) {
-        //i think we will have to use get name
+      //create a set and loop through it
+      for (Place n : currNeighbors) {
+        //gets name (string) and compares to choice (also string)
+        if (n.getName().equals(choice)) {
+          current = n;
+        }
+        //add else later
       }
-      current = choice; //use Iterable and potential HashMap
+      // if (map.adjacentNodes(Exit.current).getName().contains(choice)) {
+      //   //i think we will have to use get name
+      // }
+      // current = Exit.choice; //use Iterable and potential HashMap; get Place in Exit with that name
       playing = true;
       
       
