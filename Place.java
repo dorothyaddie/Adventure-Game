@@ -56,7 +56,7 @@ class Place {
       inventory.add(item);
       System.out.println("\nYou are now carrying a " + item + ".");
     } else {
-      System.out.println("\nYou cannot take this item.");
+      System.out.println("\nYou cannot take this item. Take only what you need.");
     }
     return inventory;
   }

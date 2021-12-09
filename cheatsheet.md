@@ -7,6 +7,11 @@ go garden
 go shed
 go dining
 go kitchen
+water plant
+take tomato
+take basil
+take book
+open fridge
 
 # SPOILER ALERT
 
