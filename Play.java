@@ -25,6 +25,9 @@ class Play {
     Scanner sc = new Scanner(System.in);
     String choice;
     ArrayList<String> inventory = new ArrayList<String>();
+    ArrayList<String> allChoices = new ArrayList<String>();
+    String word1;
+    String word2;
 
     while (playing == true) {
       System.out.print("\nYou are currently in the " + current.getName() + ". \nYou see " + current.getDescription() + " \nFrom here, you can travel to ");
@@ -32,70 +35,57 @@ class Play {
       ArrayList<Place> currNeighbors = world.getNeighbors(current.getName());
       world.printNeighbors(currNeighbors);
 
-      System.out.println("What would you like to do?");
+      System.out.println("What would you like to do?\n");
       choice = sc.nextLine();
-      //for each place check if it is in the neighbors 
+      allChoices.add(choice);
+      word1 = choice.split(" ")[0];
+      word2 = choice.split(" ")[1];
+
+      // if user types a place
       for (Place n : currNeighbors) {
       //gets name (string) and compares to choice (also string)
-        if (n.getName().equals(choice.split(" ")[1])) {
+        if ((n.getName().equals(word1)) || (n.getName().equals(word2))) {
           current = n;
-          } 
+        }
+      }
+
+      //if user wants to take an item, update inventory
+      if (word1.equals("take")) {
+        inventory = current.take(inventory, word2);
+      }
+
+      // if user says "inventory," print inventory
+      if (word2.equals("inventory")) {
+        System.out.println("\nYou are currently carrying: ");
+        for (String s : inventory) {
+          System.out.println(s);
+        }
       }
 
       /*All methods we can do inside the shed are here*/
       //if we want to allow the user to take anything else on the walls we just need to add them to the items list for each place
       if (current.getName().equals("shed")) {
-        //if what we typed is an item
-        if (current.getItems().contains(choice.split(" ")[1])) {
-          //remove the item from the items 
-          current.getItems().remove(choice.split(" ")[1]);
-          //add it to inventory
-          take(inventory, choice.split(" ")[1]);
+        if (choice.equals("take can")) {
+          current.setDescription("a small wooden table. The walls of the shed are wooden and there are a few items hanging on the wall: a shovel, a spade, a rake, and gardening gloves.");
         }
-        //not a place or an item
-        else if (!current.getItems().contains(choice.split(" ")[1])) {
-          System.out.println("You cannot take this item.");
-        //}
-        //not an item but a place
-        //if we are in the shed
-        //add else later
-          }
       }
 
       /*All methods we can do inside the garden take place here*/
-      if (current.getName().equals("garden")) {
-        if (choice.equals("water plant")) {
-          System.out.print("You watered the plant!");
-          current.setDescription("the outside of the shed. To your side, there is a small patch of land fenced off with a plastic net. Inside the patch of land, there is a large tomato plant that's grown one huge tomato!");
+      else if (current.getName().equals("garden")) {
+
+        int countWater = Collections.frequency(allChoices, "water plant");
+
+        //if user typed "water plant"
+        if ((choice.equals("water plant")) && (countWater == 1)) { //this is the first time we've watered the plant
+          System.out.println("\nYou watered the plant!");
+          current.setDescription("the outside of the shed. To your side, there is a small patch of land fenced off with a plastic net. Inside the patch of land, there is a large tomato plant that's grown many huge tomatoes!");
           current.addItem("tomato");
         }
+        else if ((choice.equals("water plant")) && (countWater > 1)) { //we've watered the plant more than once
+          System.out.println("\nThe large tomato plant is now wilted and yellowed. All its leaves have fallen off, as well as the one tomato. Your beloved tomato plant is dead. Better luck next time!");
+          playing = false;
+        }
       }
-    
-      //create a set and loop through it
-      //for (Place n : currNeighbors) {
-        //gets name (string) and compares to choice (also string)
-        //if (n.getName().equals(choice.split(" ")[1])) {
-          //current = n;
-        //} 
-        //if we are in the shed
-        //add else later
-      //}
-      // if (map.adjacentNodes(Exit.current).getName().contains(choice)) {
-      //   //i think we will have to use get name
-      // }
-      // current = Exit.choice; //use Iterable and potential HashMap; get Place in Exit with that name
-      
-      
     }
-  }
-
-  public static ArrayList<String> take(ArrayList<String> inventory, String item) {
-      inventory.add(item);
-      System.out.print("You are now carrying a ");
-      for (String i : inventory) {
-        System.out.println(i + ".");
-      }
-      return inventory;
-
   }
 }

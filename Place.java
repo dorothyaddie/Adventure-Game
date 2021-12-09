@@ -47,6 +47,20 @@ class Place {
     this.getItems().add(item);
   }
 
+  public ArrayList<String> take(ArrayList<String> inventory, String item) {
+
+    if (this.getItems().contains(item)) {
+      //remove the item from the items 
+      this.getItems().remove(item);
+      //add it to inventory
+      inventory.add(item);
+      System.out.println("\nYou are now carrying a " + item + ".");
+    } else {
+      System.out.println("\nYou cannot take this item.");
+    }
+    return inventory;
+  }
+
   /*Override toString to print name as a string*/
   public String toString() {
     return this.name;
