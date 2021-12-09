@@ -1,37 +1,30 @@
+import com.google.common.graph.*;
+import java.util.Set;
+import java.util.*;
+
+
 //this is the place class
 //methods that only work for some places
 //maybe some methods can only be called when in certain rooms, meaning they are parameters
 
 import java.util.ArrayList;
 
-public class Place {
+class Place {
   private String name; 
-  private ArrayList<String> items; 
   private String description; 
-  private String updatedDescription;
+  private ArrayList<String> items; 
 
   /*Constructor that makes a new place*/
   public Place(String name, ArrayList<String> items, String description) {
     this.name = name;
     this.items = items; 
     this.description = description;
-    this.updatedDescription = updatedDescription;
    //name of place
   }
 
-  /** things a place has: 
-  * - a name (String)
-  * - a description (String, printed to console)
-  * - objects in it (that user can interact with)
-  */
-
-  /*Getter for the updated description*/
-  public String getUpdatedDescription() {
-    return this.updatedDescription;
-  }
   /*Getter for the name*/
   public String getName() {
-     return this.name;
+    return this.name;
   }
 
   /*Getter for the description*/
@@ -39,14 +32,23 @@ public class Place {
     return this.description;
   }
 
+  /*Setter for the description*/
+  public void setDescription(String newDescription) {
+    this.description = newDescription;
+  }
+
   /*Getter for the items*/
   public ArrayList<String> getItems() {
     return this.items;
   }
 
-  public String toString() {
-    return name;
+  /*Add item to a Place's items*/
+  public void addItem(String item) {
+    this.getItems().add(item);
   }
 
-  
+  /*Override toString to print name as a string*/
+  public String toString() {
+    return this.name;
+  }
 }

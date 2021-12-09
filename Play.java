@@ -3,8 +3,9 @@ import java.util.Set;
 import com.google.common.graph.*;
 import java.util.*;
 import java.util.ArrayList;
+//make a list of descriptions and remove them as needed
 
-public class Play {
+class Play {
 
   //we will always start in the garden
   //do description and then list the adjacent nodes
@@ -16,28 +17,30 @@ public class Play {
   
   /*Constructor creates a new instance of the map*/
 
-  //creates a new map
-  //private static Exit world = new Exit();
-  //creates a variable for current node
-  private static Place current = Exit.shed; //maybe use Iterable? create Traverser and do breadth first traversal (i think), point to garden in map using index in Iterable? maybe use a map to store each Place and its index, access each Place by index determined by Iterable... HashMap?
-  // ok OR use a getter in Exit to get Node w name "garden"
-  private static boolean playing;
-  static Scanner sc = new Scanner(System.in);
-  private static String choice;
-  private Exit world = new Exit();
-  private static ArrayList<String> inventory = new ArrayList<String>();
-  
-  public static void playGame(Exit world) {
+  public static void main(String[] args) {
     //creates a new map
-    playing = true;
+    Exit world = new Exit();
+    Place current = world.getShed();
+    boolean playing = true;
+    Scanner sc = new Scanner(System.in);
+    String choice;
+    ArrayList<String> inventory = new ArrayList<String>();
+
     while (playing == true) {
-      Set<Place> currNeighbors = Exit.getNeighbors(current);
-      System.out.println("You are currently in the " + current.getName() + ". You see " + current.getDescription() + " From here, you can travel to the "); 
-      for (Place s : currNeighbors) {
-        System.out.print(s + " ");
-        } 
-      System.out.println(". What should you like to do?");
+      System.out.print("\nYou are currently in the " + current.getName() + ". \nYou see " + current.getDescription() + " \nFrom here, you can travel to ");
+      
+      ArrayList<Place> currNeighbors = world.getNeighbors(current.getName());
+      world.printNeighbors(currNeighbors);
+
+      System.out.println("What would you like to do?");
       choice = sc.nextLine();
+      //for each place check if it is in the neighbors 
+      for (Place n : currNeighbors) {
+      //gets name (string) and compares to choice (also string)
+        if (n.getName().equals(choice.split(" ")[1])) {
+          current = n;
+          } 
+      }
 
       /*All methods we can do inside the shed are here*/
       //if we want to allow the user to take anything else on the walls we just need to add them to the items list for each place
@@ -47,7 +50,7 @@ public class Play {
           //remove the item from the items 
           current.getItems().remove(choice.split(" ")[1]);
           //add it to inventory
-          Character.take(inventory, choice.split(" ")[1]);
+          take(inventory, choice.split(" ")[1]);
         }
         //not a place or an item
         else if (!current.getItems().contains(choice.split(" ")[1])) {
@@ -57,14 +60,17 @@ public class Play {
         //if we are in the shed
         //add else later
           }
-        }
-      //for each place check if it is in the neighbors 
-      for (Place n : currNeighbors) {
-      //gets name (string) and compares to choice (also string)
-        if (n.getName().equals(choice.split(" ")[1])) {
-          current = n;
-          } 
       }
+
+      /*All methods we can do inside the garden take place here*/
+      if (current.getName().equals("garden")) {
+        if (choice.equals("water plant")) {
+          System.out.print("You watered the plant!");
+          current.setDescription("the outside of the shed. To your side, there is a small patch of land fenced off with a plastic net. Inside the patch of land, there is a large tomato plant that's grown one huge tomato!");
+          current.addItem("tomato");
+        }
+      }
+    
       //create a set and loop through it
       //for (Place n : currNeighbors) {
         //gets name (string) and compares to choice (also string)
@@ -78,9 +84,18 @@ public class Play {
       //   //i think we will have to use get name
       // }
       // current = Exit.choice; //use Iterable and potential HashMap; get Place in Exit with that name
-      playing = true;
       
       
     }
+  }
+
+  public static ArrayList<String> take(ArrayList<String> inventory, String item) {
+      inventory.add(item);
+      System.out.print("You are now carrying a ");
+      for (String i : inventory) {
+        System.out.println(i + ".");
+      }
+      return inventory;
+
   }
 }
