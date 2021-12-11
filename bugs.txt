@@ -1,0 +1,20 @@
+This is for logging our bugs! 
+
+Things we COULD add:
+- point system?
+- more gardening
+- description as list
+- more pizza making steps
+- game over if tomato plant dies
+- more game over outcomes
+- do you want to try again
+- randomize burnt pizza if no book
+- save progress as txt file (list of fields you want to save, strings the comp could read w bufferwriter bufferreader)
+- read book/ open book
+
+Things we still need:
+- review variable & method names, make sure all have clear and accurate names
+- classes & class members all need Javadoc header comments
+- description of the layout (map)
+- design justification (includes a discussion of at least one reasonable alternative data structure that could have been used, and the reasons why you decided against this alternative)
+- architecture diagram describing the relationships between all classes; a class diagram showing how the data structures driving your game interact with one another

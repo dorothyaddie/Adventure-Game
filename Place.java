@@ -48,13 +48,24 @@ class Place {
   }
 
   public ArrayList<String> take(ArrayList<String> inventory, String item) {
-
-    if (this.getItems().contains(item)) {
+    if ((this.getItems().contains(item)) && (!(item.equals("basil")))) {
       //remove the item from the items 
       this.getItems().remove(item);
       //add it to inventory
       inventory.add(item);
       System.out.println("\nYou are now carrying a " + item + ".");
+    } else if ((this.getItems().contains(item)) && (item.equals("basil"))) {
+      //remove the item from the items 
+      this.getItems().remove(item);
+      //add it to inventory
+      inventory.add(item);
+      System.out.println("\nYou are now carrying a " + item + " leaf.");
+    } else if (item.equals("tomatoes")) {
+      System.out.println("\nYou cannot take these items. Take only what you need.");
+    } else if (item.equals("food")) {
+      System.out.println("\nBe a little more specific.");
+    } else if (item.equals("plant")) {
+      System.out.println("\nYou cannot take this item... yet. \nIt's not fully grown.");
     } else {
       System.out.println("\nYou cannot take this item. Take only what you need.");
     }
