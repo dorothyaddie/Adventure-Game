@@ -19,7 +19,6 @@ class Place {
     this.name = name;
     this.items = items; 
     this.description = description;
-   //name of place
   }
 
   /*Getter for the name*/
@@ -61,13 +60,16 @@ class Place {
       inventory.add(item);
       System.out.println("\nYou are now carrying a " + item + " leaf.");
     } else if (item.equals("tomatoes")) {
-      System.out.println("\nYou cannot take these items. Take only what you need.");
+      System.out.println("\nYou cannot take more than one tomato. Take only what you\nneed.");
     } else if (item.equals("food")) {
       System.out.println("\nBe a little more specific.");
-    } else if (item.equals("plant")) {
-      System.out.println("\nYou cannot take this item... yet. \nIt's not fully grown.");
-    } else {
-      System.out.println("\nYou cannot take this item. Take only what you need.");
+    } else if ((item.equals("watering")) && (this.getItems().contains("can"))) {
+      this.getItems().remove("can");
+      //add it to inventory
+      inventory.add("can");
+      System.out.println("\nYou are now carrying a can.");
+    }else {
+      System.out.println("\nYou don't need to take the " + item + ". Take only what you need.");
     }
     return inventory;
   }
